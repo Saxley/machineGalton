@@ -4,6 +4,10 @@
 
 > El objetivo principal de este proyecto es simular una máquina de Galton para ilustrar de forma práctica un concepto fundamental de la probabilidad. <br>A través de la simulación de 3,000 canicas cayendo por 12 niveles de obstáculos, el programa demuestra que, aunque el camino de cada canica es completamente aleatorio, el resultado final de la distribución de las canicas en los contenedores sigue un patrón predecible en forma de curva de campana.
 
+## Instalacion de dependencias.
+
+> Es necesario crear tu entorno virtual e instalar las dependencias que se encuentran en el archivo requirements.txt.<br>Para crear tu entorno virtual en Linux tendras que ejecutar el siguiente comando en consola:<br>`python3 -m venv .venv`<br>Una vez creado tu entorno virtual, debes activarlo con el siguiente comando:<br>`source .venv/bin/activate`<br>Por ultimo asegurate de estar en la carpeta donde esta el archivo requirements.txt y ejecuta el siguiente comando:<br>`pip install -r requirements.txt`<br>Una vez que terminen de instalarse ejecuta el script Luis_Javier_Arriaga_Carranza_proyectoM3.py desde tu entorno virtual con el comando:<br>`python3 Luis_Javier_Arriaga_Carranza_proyectoM3.py`<br>Si deseas salir de tu entorno virtual ejecuta el siguiente comando:<br>`deactivate`<hr>Para crear tu entorno virtual en Windows, deberás ejecutar el siguiente comando en la terminal (CMD o PowerShell):<br>`python -m venv .venv`<br>Una vez que tu entorno virtual haya sido creado, debes activarlo con el siguiente comando:<br>`.\.venv\Scripts\activate`<br>Por último, asegúrate de estar en la misma carpeta donde se encuentra el archivo requirements.txt y ejecuta el siguiente comando:<br>`pip install -r requirements.txt`<br>Una vez que las dependencias terminen de instalarse, ejecuta el script Luis_Javier_Arriaga_Carranza_proyectoM3.py desde tu entorno virtual con el comando:<br>`python Luis_Javier_Arriaga_Carranza_proyectoM3.py`<br>Si deseas salir de tu entorno virtual, ejecuta el siguiente comando:<br>`deactivate`
+
 ## Funciones
 
 > A continuación describire que hace cada función en mi programa.
