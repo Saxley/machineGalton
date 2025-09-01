@@ -1,4 +1,4 @@
-# Maquina de Galtón
+# Grafica de datos aleatorios (Maquina de Galton)
 
 ### Objetivo.
 
