@@ -1,99 +1,99 @@
-import os # Uso esta biblioteca para obtener el numero de elementos en un directorio
-import numpy as np # Uso la biblioteca numpy para generar numeros aleatorios de forma binomial.
-import matplotlib.pyplot as plt # Uso la biblioteca matplotlib.pyplot para generar el grafico
-from collections import Counter # Counter nos servira para contar los numeros repetidos del arreglo adquirido
-from typing import Dict # typing nos ayuda a determinar lo que devuelve y lo que recibe una funcion.
+import os # I use this library to get the number of elements in a directory
+import numpy as np # I use the numpy library to generate random numbers in a binomial way.
+import matplotlib.pyplot as plt # I use the matplotlib.pyplot library to generate the chart
+from collections import Counter # Counter will help us count the repeated numbers in the acquired array
+from typing import Dict # typing helps us determine what a function returns and what it receives.
 
 def count_files_in_directory(path:str) -> int:
     """
-    Cuenta el número de archivos en la carpeta.
+    Counts the number of files in the folder.
     
-    Recibe los argumentos:
-        path (str): La ruta de la carpeta.
+    Receives the arguments:
+        path (str): The path of the folder.
 
-    Retorna:
-        int: El número de elementos en la carpeta.
+    Returns:
+        int: The number of elements in the folder.
     """
     try:
-        # Genera una lista de todos los elementos, dentro de la carpeta especificada.
+        # Generates a list of all elements inside the specified folder.
         elements = os.listdir(path)
         
-        # Devuelve la longitud de la lista, que es el número total de elementos.
+        # Returns the length of the list, which is the total number of elements.
         return len(elements)
     except FileNotFoundError:
-        # Maneja el caso en el que la ruta no existe.
-        print(f"Error: La carpeta '{path}' no fue encontrada.")
-        return -1  # Retorna -1 para indicar un error
+        # Handles the case where the path does not exist.
+        print(f"Error: The folder '{path}' was not found.")
+        return -1  # Returns -1 to indicate an error
 
 
 
 def simulate_galton_machine(num_balls: int, num_levels: int) -> Dict[int, int]:
     """
-    Simula la caída de canicas en una máquina de Galton.
+    Simulates the fall of marbles in a Galton board.
     
-    Recibe los argumentos:
-        num_balls (int): Número total de canicas.
-        num_levels (int): Número de niveles de la máquina de Galton.
+    Receives the arguments:
+        num_balls (int): Total number of marbles.
+        num_levels (int): Number of levels of the Galton board.
 
-    Retorna:
-        dict: Claves = contenedores, Valores = número de canicas en cada uno.
+    Returns:
+        dict: Keys = containers, Values = number of marbles in each container.
     """
-    # Genera 3000 números, donde cada número es el conteo de veces que una canica 
-    # se desvió en los 12 niveles de la maquina de Galton.
-    # Cada bola tiene probabilidad 0.5 de desviarse a la derecha en cada nivel
+    # Generates 3000 numbers, where each number is the count of times a marble 
+    # deviated in the 12 levels of the Galton board.
+    # Each ball has a 0.5 probability of deviating to the right at each level
     results = np.random.binomial(num_levels, 0.5, size=num_balls)
 
-    # Contamos los valores repetidos de los 3000 elementos, la funcion ´Counter´ nos devuelve un objeto Counter.
-    # Este objeto es muy similar a un diccionario se basa en el numero como key y como value el conteo de dicho numero
+    # We count the repeated values of the 3000 elements, the 'Counter' function returns a Counter object.
+    # This object is very similar to a dictionary; it is based on the number as the key and the count of that number as the value
     counts = Counter(results)
-    # Nos aseguramos de que retornaremos un tipo de dato ´dictionary´ transformando el objeto Counter en un dict
+    # We make sure to return a 'dictionary' data type by transforming the Counter object into a dict
     return dict(counts)
 
 
 def plot_histogram(data: Dict[int, int], filename: str) -> None:
     """
-    Grafica un histograma a partir de los resultados de la simulación.
-    Genera un grafico en la carpeta images.
+    Plots a histogram from the simulation results.
+    Generates a chart in the images folder.
     
-    Recibe los argumentos:
-        data(Dict[int:int]) : un diccionario con clave valor de tipo enteros
-        filename(str) : una cadena de texto que sirve como path para almacenar el histograma
+    Receives the arguments:
+        data(Dict[int:int]): a dictionary with key-value pairs of integers
+        filename(str): a text string that serves as a path to store the histogram
     
-    Retorna:
-        No retorna nada
+    Returns:
+        Does not return anything
     """
-    container_indices = sorted(data.keys()) # adquirimos los indices y los ordenamos con la funcion ´sorted´ 
-    ball_counts = [data[i] for i in container_indices] # creamos una nueva lista con los valores ordenados conforme a los indices
+    container_indices = sorted(data.keys()) # we get the indices and sort them with the 'sorted' function 
+    ball_counts = [data[i] for i in container_indices] # we create a new list with values ordered according to the indices
 
-    plt.figure(figsize=(10, 6)) # Creamos nuestro plano
+    plt.figure(figsize=(10, 6)) # We create our plot
     ''' 
-    Indicamos que en el plano se creara un grafico de barras.
-    Le pasamos 2 valores que actuaran como X,Y.
-    Asignamos el color a las barras y a los bordes.
+    We indicate that a bar chart will be created on the plot.
+    We pass 2 values that will act as X,Y.
+    We assign color to the bars and their edges.
     '''
     plt.bar(container_indices, ball_counts, color="orange", edgecolor="green") 
 
-    plt.title("Simulación de la Máquina de Galton") # Asignamos un titulo al gráfico
-    plt.xlabel("Contenedores") # Asignamos nombre al eje X
-    plt.ylabel("Cantidad de Canicas") # Asignamos nombre al eje Y
-    plt.xticks(container_indices) # Indicamos el numero de barras que seran visibles
-    plt.grid(axis="y", linestyle="dotted", alpha=0.7) # Dibujamos una cuadricula para que se vea similar a la maquina de Galton
+    plt.title("Simulation of the Galton Machine") # We assign a title to the chart
+    plt.xlabel("Containers") # We assign a name to the X axis
+    plt.ylabel("Number of Marbles") # We assign a name to the Y axis
+    plt.xticks(container_indices) # We indicate the number of bars that will be visible
+    plt.grid(axis="y", linestyle="dotted", alpha=0.7) # We draw a grid to make it look similar to the Galton board
 
-    plt.savefig(filename, dpi=150) # Almacenamos la imagen con una resolucion de 150
-    plt.close() # cerramos el plano
-    print(f"El histograma ha sido guardado como '{filename}'") # Notificamos la creación y el nombre
+    plt.savefig(filename, dpi=150) # We save the image with a resolution of 150
+    plt.close() # we close the plot
+    print(f"The histogram has been saved as '{filename}'") # We notify the creation and the name
 
 
 if __name__ == "__main__":
-    #CONSTANTES
-    NUM_BALLS = 3000 # numero de pelotas
-    NUM_LEVELS = 12 # numero de niveles
-    FOLDER_PATH = './images' # Ruta de almacenamiento
+    #CONSTANTS
+    NUM_BALLS = 3000 # number of balls
+    NUM_LEVELS = 12 # number of levels
+    FOLDER_PATH = './images' # Storage path
 
     # VARIABLES
-    # Llama a la función que contara los elementos de mi carpeta images
-    num_elements = count_files_in_directory(FOLDER_PATH) # numero de archivos en la carpeta
-    name_histogram = f"{FOLDER_PATH}/galton_histogram_{num_elements+1}.png" # ruta con el nuevo nombre para el archivo nuevo
+    # Calls the function that will count the elements in my images folder
+    num_elements = count_files_in_directory(FOLDER_PATH) # number of files in the folder
+    name_histogram = f"{FOLDER_PATH}/galton_histogram_{num_elements+1}.png" # path with the new name for the new file
 
-    results = simulate_galton_machine(NUM_BALLS, NUM_LEVELS) # Ejecutamos el simulador
-    plot_histogram(results, name_histogram) # Creamos el gráfico
+    results = simulate_galton_machine(NUM_BALLS, NUM_LEVELS) # We run the simulator
+    plot_histogram(results, name_histogram) # We create the chart
